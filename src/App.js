@@ -1,12 +1,12 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import ArchivePage from '../pages/ArchivePage';
-import DetailPage from '../pages/DetailPage';
-import HomePage from '../pages/HomePage';
-import AddPage from '../pages/AddPage';
-import Navgation from './Navigation';
+import ArchivePage from './pages/ArchivePage';
+import DetailPage from './pages/DetailPage';
+import HomePage from './pages/HomePage';
+import AddPage from './pages/AddPage';
+import Navgation from './components/Navigation';
 
-function NotesApp() {
+function App() {
   return (
     <div className="notes-app bg-slate-300 text-slate-600 min-h-screen">
       <header className="px-5 py-8">
@@ -24,4 +24,4 @@ function NotesApp() {
   );
 }
 
-export default NotesApp;
+export default App;
