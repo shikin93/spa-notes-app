@@ -21,7 +21,7 @@ export default function HomePage() {
 
   const onKeywordChangeHandler = (e) => {
     setKeyword(e.target.value);
-    setSearchParams({ keyword });
+    setSearchParams({ keyword: e.target.value });
   };
 
   return (

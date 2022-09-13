@@ -14,7 +14,7 @@ export default function ArchivePage() {
 
   const onKeywordChangeHandler = (e) => {
     setKeyword(e.target.value);
-    setSearchParams({ keyword });
+    setSearchParams({ keyword: e.target.value });
   };
 
   return (
