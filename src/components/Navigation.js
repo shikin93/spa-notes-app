@@ -5,7 +5,7 @@ function Navigation() {
   return (
     <nav className="flex items-center justify-between">
       <h1 className="text-3xl font-bold"><Link to="/">Notes App</Link></h1>
-      <Link to="/archives">Arsip</Link>
+      <Link className="text-xl font-bold hover:bg-slate-200 py-1 px-2 rounded-lg" to="/archives">Arsip</Link>
     </nav>
   );
 }
