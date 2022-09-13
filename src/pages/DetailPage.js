@@ -4,11 +4,16 @@ import NoteDetail from '../components/NoteDetail';
 import {
   getNote, deleteNote, archiveNote, unarchiveNote,
 } from '../utils/local-data';
+import PageNotFound from './PageNotFound';
 
 export default function DetailPage() {
   const { id } = useParams();
   const noteById = getNote(id);
   const navigate = useNavigate();
+
+  if (noteById === undefined) {
+    return <PageNotFound />;
+  }
 
   const onDeleteHandler = () => {
     deleteNote(id);
