@@ -37,8 +37,8 @@ export default function HomePage() {
     <section>
       <h2 className="text-2xl font-bold">Catatan Aktif</h2>
       <SearchBar keyword={keyword} keywordChange={onKeywordChangeHandler} />
-      {(notes.length === 0) ? <div className="text-3xl text-center">Tidak ada catatan</div> : <NoteList notes={searchNote} />}
-      <button type="button" className="text-4xl p-2 bg-slate-100 rounded-full fixed bottom-10 right-5" onClick={onAdd}>
+      {(searchNote.length === 0) ? <div className="text-3xl text-center dark:text-slate-400">Tidak ada catatan</div> : <NoteList notes={searchNote} />}
+      <button type="button" className="text-4xl p-2 bg-slate-100 rounded-full fixed bottom-10 right-5 dark:text-slate-600" onClick={onAdd}>
         <BiPlus />
       </button>
     </section>

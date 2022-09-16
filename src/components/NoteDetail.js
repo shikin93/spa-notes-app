@@ -8,9 +8,9 @@ export default function NoteDetail({
 }) {
   return (
     <>
-      <h2 className="text-5xl font-bold">{title}</h2>
-      <p className="text-xl pt-2">{showFormatedDate(createdAt)}</p>
-      <p className="text-xl pt-8">{body}</p>
+      <h2 className="text-5xl font-bold dark:text-slate-100">{title}</h2>
+      <p className="text-xl pt-2 text-slate-400">{showFormatedDate(createdAt)}</p>
+      <p className="text-xl pt-8 dark:text-slate-100">{body}</p>
       <NoteDetailAction
         id={id}
         onDelete={onDelete}

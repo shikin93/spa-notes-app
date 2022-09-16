@@ -19,7 +19,7 @@ export default function RegisterPage() {
       <RegisterInput register={onRegisterHandler} />
       <p>
         {'Kamu sudah punya akun? '}
-        <Link className="underline hover:text-blue-600" to="/">Masuk di sini</Link>
+        <Link className="hover:underline" to="/">Masuk di sini</Link>
       </p>
     </section>
   );

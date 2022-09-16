@@ -19,7 +19,7 @@ export default function LoginPage({ loginSuccess }) {
       <LoginInput login={onLogin} />
       <p>
         {'Belum punya akun? '}
-        <Link className="underline hover:text-blue" to="/register">Daftar di sini.</Link>
+        <Link className="hover:underline" to="/register">Daftar di sini</Link>
       </p>
     </section>
   );

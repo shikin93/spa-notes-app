@@ -40,9 +40,9 @@ export default function ArchivePage() {
 
   return (
     <section>
-      <h2 className="text-2xl font-bold">Catatan Arsip</h2>
+      <h2 className="text-2xl font-bold dark:text-slate-100">Catatan Arsip</h2>
       <SearchBar keyword={keyword} keywordChange={onKeywordChangeHandler} />
-      {(archived.length === 0) ? <div className="text-3xl text-center">Tidak ada catatan</div> : <NoteList notes={searchArchive} />}
+      {(searchArchive.length === 0) ? <div className="text-3xl text-center dark:text-slate-400">Tidak ada catatan</div> : <NoteList notes={searchArchive} />}
     </section>
   );
 }
