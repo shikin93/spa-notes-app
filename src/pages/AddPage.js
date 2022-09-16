@@ -1,24 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import NoteInput from '../components/NoteInput';
-import { addNote } from '../utils/local-data';
+import { addNote } from '../utils/network-data';
+import useInput from '../hooks/useInput';
 
 export default function AddPage() {
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
+  const [title, onChangeTitleHandler] = useInput();
+  const [body, onChangeBodyHandler] = useInput();
   const navigate = useNavigate();
-
-  const onChangeTitleHandler = (e) => {
-    setTitle(
-      e.target.value.slice(0, 50),
-    );
-  };
-
-  const onChangeBodyHandler = (e) => {
-    setBody(
-      e.target.value,
-    );
-  };
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
