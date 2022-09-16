@@ -6,13 +6,17 @@ export default function useNotes() {
   const [notes, setNotes] = useState([]);
 
   useEffect(() => {
-    getActiveNotes().then(() => {
-      setNotes(notes);
+    const getNoteData = async () => {
+      const { data } = await getActiveNotes();
+
+      setNotes(data);
       setLoading(false);
-    });
+    };
+
+    getNoteData();
 
     return () => {
-      setLoading(true);
+      setNotes([]);
     };
   }, []);
 

@@ -1,32 +1,53 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import NoteDetail from '../components/NoteDetail';
 import {
-  getNote, deleteNote, archiveNote, unarchiveNote,
-} from '../utils/local-data';
+  getNote, archiveNote, unarchiveNote, deleteNote,
+} from '../utils/network-data';
 import PageNotFound from './PageNotFound';
 
 export default function DetailPage() {
   const { id } = useParams();
-  const noteById = getNote(id);
   const navigate = useNavigate();
+  const [noteById, setNoteById] = useState(id);
+  const [initializing, setInitializing] = useState(true);
 
-  if (noteById === undefined) {
+  useEffect(() => {
+    const getNoteData = async () => {
+      const { data } = await getNote(id);
+
+      setNoteById(data);
+      setInitializing(false);
+    };
+
+    getNoteData();
+
+    return () => {
+      setNoteById([]);
+      setInitializing(true);
+    };
+  }, []);
+
+  if (initializing) {
+    return null;
+  }
+
+  if (noteById === null) {
     return <PageNotFound />;
   }
 
-  const onDeleteHandler = () => {
-    deleteNote(id);
+  const onDeleteHandler = async () => {
+    await deleteNote(id);
     navigate('/');
   };
 
-  const onArchiveHandler = () => {
-    archiveNote(id);
+  const onArchiveHandler = async () => {
+    await archiveNote(id);
     navigate('/');
   };
 
-  const onRestoreHandler = () => {
-    unarchiveNote(id);
+  const onRestoreHandler = async () => {
+    await unarchiveNote(id);
     navigate('/');
   };
 

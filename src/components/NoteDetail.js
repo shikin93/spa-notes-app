@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { showFormatedDate } from '../utils/local-data';
+import showFormatedDate from '../utils/formatDate';
 import NoteDetailAction from './NoteDetailAction';
 
 export default function NoteDetail({
