@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import ArchivePage from './pages/ArchivePage';
 import DetailPage from './pages/DetailPage';
@@ -11,7 +11,7 @@ import LoginPage from './pages/LoginPage';
 import { getUserLogged, putAccessToken } from './utils/network-data';
 import ToggleTheme from './components/ToggleTheme';
 import { ThemeProvider } from './contexts/ThemeContext';
-import { LocaleProvider } from './contexts/LocalContext';
+import LocaleContext from './contexts/LocalContext';
 import ToggleLocale from './components/ToggleLocale';
 
 function App() {
@@ -74,6 +74,10 @@ function App() {
     });
   };
 
+  const localeContextValue = useMemo(() => ({
+    locale, toggleLocale,
+  }), [locale]);
+
   if (initializing) {
     return null;
   }
@@ -81,7 +85,7 @@ function App() {
   if (authedUser === null) {
     return (
       <ThemeProvider value={{ theme, toggleTheme }}>
-        <LocaleProvider value={{ locale, toggleLocale }}>
+        <LocaleContext.Provider value={localeContextValue}>
           <div className="notes-app bg-slate-300 text-slate-600 min-h-screen dark:bg-slate-900 dark:text-slate-100">
             <header className="px-5 py-8 flex justify-between items-center">
               <h1 className="text-3xl font-bold"><Link to="/">{locale === 'id' ? 'Aplikasi Notes' : 'NotesApp'}</Link></h1>
@@ -97,14 +101,14 @@ function App() {
               </Routes>
             </main>
           </div>
-        </LocaleProvider>
+        </LocaleContext.Provider>
       </ThemeProvider>
     );
   }
 
   return (
     <ThemeProvider value={{ theme, toggleTheme }}>
-      <LocaleProvider value={{ locale, toggleLocale }}>
+      <LocaleContext.Provider value={localeContextValue}>
         <div className="notes-app bg-slate-300 text-slate-600 dark:bg-slate-900 min-h-screen dark:text-slate-100">
           <header className="px-5 py-8">
             <Navigation logout={onLogoutHandler} name={authedUser.name} />
@@ -119,7 +123,7 @@ function App() {
             </Routes>
           </main>
         </div>
-      </LocaleProvider>
+      </LocaleContext.Provider>
     </ThemeProvider>
   );
 }

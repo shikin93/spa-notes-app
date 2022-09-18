@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import LoginInput from '../components/LoginInput';
 import { login } from '../utils/network-data';
-import { LocaleConsumer } from '../contexts/LocalContext';
+import LocaleContext from '../contexts/LocalContext';
 
 export default function LoginPage({ loginSuccess }) {
   const onLogin = async ({ email, password }) => {
@@ -14,21 +14,17 @@ export default function LoginPage({ loginSuccess }) {
     }
   };
 
+  const { locale } = useContext(LocaleContext);
+
   return (
-    <LocaleConsumer>
-      {
-        ({ locale }) => (
-          <section>
-            <h2 className="text-2xl mb-4 font-bold">{locale === 'id' ? 'Login dulu kuy..' : 'Login to use app'}</h2>
-            <LoginInput login={onLogin} />
-            <p>
-              {locale === 'id' ? 'Belum punya akun? ' : 'Don\'t have an account? '}
-              <Link className="hover:underline" to="/register">{locale === 'id' ? 'Daftar disini' : 'Register here'}</Link>
-            </p>
-          </section>
-        )
-      }
-    </LocaleConsumer>
+    <section>
+      <h2 className="text-2xl mb-4 font-bold text-center">{locale === 'id' ? 'Login dulu kuy..' : 'Login to use app'}</h2>
+      <LoginInput login={onLogin} />
+      <p>
+        {locale === 'id' ? 'Belum punya akun? ' : 'Don\'t have an account? '}
+        <Link className="hover:underline" to="/register">{locale === 'id' ? 'Daftar disini' : 'Register here'}</Link>
+      </p>
+    </section>
   );
 }
 

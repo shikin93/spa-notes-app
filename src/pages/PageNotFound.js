@@ -1,17 +1,13 @@
-import React from 'react';
-import { LocaleConsumer } from '../contexts/LocalContext';
+import React, { useContext } from 'react';
+import LocaleContext from '../contexts/LocalContext';
 
 export default function PageNotFound() {
+  const { locale } = useContext(LocaleContext);
+
   return (
-    <LocaleConsumer>
-      {
-        ({ locale }) => (
-          <section className="text-center">
-            <h2 className="text-9xl text-red-400 font-bold">404</h2>
-            <p className="pt-4 text-xl">{locale === 'id' ? 'Halaman tidak ditemukan' : 'Page not found'}</p>
-          </section>
-        )
-      }
-    </LocaleConsumer>
+    <section className="text-center">
+      <h2 className="text-9xl text-red-400 font-bold">404</h2>
+      <p className="pt-4 text-xl">{locale === 'id' ? 'Halaman tidak ditemukan' : 'Page not found'}</p>
+    </section>
   );
 }

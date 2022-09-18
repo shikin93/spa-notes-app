@@ -1,21 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { MdGTranslate } from 'react-icons/md';
-import { LocaleConsumer } from '../contexts/LocalContext';
+import LocaleContext from '../contexts/LocalContext';
 
 function ToggleLocale() {
+  const { locale, toggleLocale } = useContext(LocaleContext);
   return (
-    <LocaleConsumer>
-      {
-        ({ locale, toggleLocale }) => (
-          <button
-            type="button"
-            onClick={toggleLocale}
-          >
-            {locale === 'id' ? <MdGTranslate /> : <MdGTranslate className="text-orange-600" />}
-          </button>
-        )
-      }
-    </LocaleConsumer>
+    <button
+      type="button"
+      onClick={toggleLocale}
+    >
+      {locale === 'id' ? <MdGTranslate /> : <MdGTranslate className="text-orange-600" />}
+    </button>
   );
 }
 
