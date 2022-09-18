@@ -7,7 +7,7 @@ function ToggleTheme() {
     <ThemeConsumer>
       {
         ({ theme, toggleTheme }) => (
-          <button type="button" onClick={toggleTheme}>{theme === 'dark' ? <BiMoon /> : <BiSun className="dark:text-slate-100" />}</button>
+          <button type="button" onClick={toggleTheme}>{!theme ? <BiMoon /> : <BiSun />}</button>
         )
       }
     </ThemeConsumer>

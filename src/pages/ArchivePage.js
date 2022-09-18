@@ -4,6 +4,7 @@ import { getArchivedNotes } from '../utils/network-data';
 import NoteList from '../components/NoteList';
 import SearchBar from '../components/SearchBar';
 import LoadingBar from '../components/LoadingBar';
+import { LocaleConsumer } from '../contexts/LocalContext';
 
 export default function ArchivePage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -39,10 +40,16 @@ export default function ArchivePage() {
   }
 
   return (
-    <section>
-      <h2 className="text-2xl font-bold dark:text-slate-100">Catatan Arsip</h2>
-      <SearchBar keyword={keyword} keywordChange={onKeywordChangeHandler} />
-      {(searchArchive.length === 0) ? <div className="text-3xl text-center dark:text-slate-400">Tidak ada catatan</div> : <NoteList notes={searchArchive} />}
-    </section>
+    <LocaleConsumer>
+      {
+        ({ locale }) => (
+          <section>
+            <h2 className="text-2xl font-bold dark:text-slate-100">{locale === 'id' ? 'Catatan Arsip' : 'Archived Notes'}</h2>
+            <SearchBar keyword={keyword} keywordChange={onKeywordChangeHandler} />
+            {(searchArchive.length === 0) ? <div className="text-3xl text-center dark:text-slate-400">Tidak ada catatan</div> : <NoteList notes={searchArchive} />}
+          </section>
+        )
+      }
+    </LocaleConsumer>
   );
 }
