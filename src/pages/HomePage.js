@@ -1,17 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BiPlus } from 'react-icons/bi';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import LoadingBar from '../components/LoadingBar';
 import NoteList from '../components/NoteList';
 import SearchBar from '../components/SearchBar';
 import LocaleContext from '../contexts/LocalContext';
-import useNotes from '../hooks/useNotes';
+import { getActiveNotes } from '../utils/network-data';
 
 export default function HomePage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const defaultKeyword = searchParams.get('keyword');
   const [keyword, setKeyword] = useState(defaultKeyword || '');
-  const [notes, loading] = useNotes();
+  const [notes, setNotes] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const getNoteData = async () => {
+      const { data } = await getActiveNotes();
+
+      setNotes(data);
+      setLoading(false);
+    };
+
+    getNoteData();
+
+    return () => {
+      setNotes([]);
+      setLoading(true);
+    };
+  }, []);
 
   const searchNote = notes.filter((note) => (
     note.title.toLowerCase().includes(keyword)
