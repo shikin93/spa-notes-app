@@ -1,32 +1,20 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { getArchivedNotes } from '../utils/network-data';
 import NoteList from '../components/NoteList';
 import SearchBar from '../components/SearchBar';
 import LoadingBar from '../components/LoadingBar';
 import LocaleContext from '../contexts/LocalContext';
+import useNotes from '../hooks/useNotes';
 
 export default function ArchivePage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const defaultKeyword = searchParams.get('keyword');
   const [keyword, setKeyword] = useState(defaultKeyword || '');
-  const [archived, setArchived] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [archived, loading] = useNotes();
 
   const searchArchive = archived.filter((note) => (
     note.title.toLowerCase().includes(keyword)
   ));
-
-  useEffect(() => {
-    const getArchiveData = async () => {
-      const { data } = await getArchivedNotes();
-
-      setArchived(data);
-      setLoading(false);
-    };
-
-    getArchiveData();
-  }, []);
 
   const onKeywordChangeHandler = (e) => {
     setKeyword(e.target.value);

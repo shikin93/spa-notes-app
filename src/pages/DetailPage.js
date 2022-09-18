@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import NoteDetail from '../components/NoteDetail';
 import {
-  getNote, archiveNote, unarchiveNote, deleteNote,
+  archiveNote, unarchiveNote, deleteNote, getNote,
 } from '../utils/network-data';
 import PageNotFound from './PageNotFound';
 
@@ -26,7 +26,7 @@ export default function DetailPage() {
       setNoteById([]);
       setInitializing(true);
     };
-  }, []);
+  }, [id]);
 
   if (initializing) {
     return null;

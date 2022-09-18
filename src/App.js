@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import {
+  Routes, Route, Link, useNavigate,
+} from 'react-router-dom';
 import ArchivePage from './pages/ArchivePage';
 import DetailPage from './pages/DetailPage';
 import HomePage from './pages/HomePage';
@@ -19,12 +21,14 @@ function App() {
   const [initializing, setInitializing] = useState(true);
   const [theme, setTheme] = useState(() => localStorage.theme === 'dark');
   const [locale, setLocale] = useState(localStorage.getItem('locale') || 'id');
+  const navigate = useNavigate();
 
   const onLoginSuccessHandler = async ({ accessToken }) => {
     putAccessToken(accessToken);
     const { data } = await getUserLogged();
 
     setAuthedUser(data);
+    navigate('/');
   };
 
   useEffect(() => {
@@ -60,6 +64,7 @@ function App() {
   const onLogoutHandler = () => {
     setAuthedUser(null);
     putAccessToken('');
+    navigate('/');
   };
 
   const toggleTheme = () => {
@@ -96,8 +101,9 @@ function App() {
             </header>
             <main className="p-5 max-w-full md:max-w-2xl lg:max-w-4xl xl:max-w-6xl mx-auto">
               <Routes>
-                <Route path="/*" element={<LoginPage loginSuccess={onLoginSuccessHandler} />} />
+                <Route exact path="/*" element={<LoginPage loginSuccess={onLoginSuccessHandler} />} />
                 <Route path="/register" element={<RegisterPage />} />
+                <Route path="*" element={<PageNotFound />} />
               </Routes>
             </main>
           </div>
@@ -119,7 +125,7 @@ function App() {
               <Route path="/archives" element={<ArchivePage />} />
               <Route path="/notes/:id" element={<DetailPage />} />
               <Route path="/notes/new" element={<AddPage />} />
-              <Route path="*" element={<PageNotFound />} />
+              <Route path="/*" element={<PageNotFound />} />
             </Routes>
           </main>
         </div>
