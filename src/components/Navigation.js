@@ -14,7 +14,7 @@ export default function Navigation({ logout, name }) {
 
   return (
     <nav className="flex items-center justify-between">
-      <h1 className="text-3xl font-bold"><Link to="/">{locale === 'id' ? 'Aplikasi Notes' : 'NotesApp'}</Link></h1>
+      <h1 className="text-3xl font-bold"><Link to="/">{locale === 'id' ? 'Aplikasi Notes' : 'Notes App'}</Link></h1>
       <div className="flex items-center gap-4 text-xl">
         <Menu>
           <ToggleLocale />

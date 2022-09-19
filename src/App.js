@@ -94,7 +94,7 @@ function App() {
         <LocaleContext.Provider value={localeContextValue}>
           <div className="notes-app bg-slate-300 text-slate-600 min-h-screen dark:bg-slate-900 dark:text-slate-100">
             <header className="px-5 py-8 flex justify-between items-center">
-              <h1 className="text-3xl font-bold"><Link to="/">{locale === 'id' ? 'Aplikasi Notes' : 'NotesApp'}</Link></h1>
+              <h1 className="text-3xl font-bold"><Link to="/">{locale === 'id' ? 'Aplikasi Notes' : 'Notes App'}</Link></h1>
               <div className="flex gap-4 text-2xl">
                 <ToggleLocale />
                 <ToggleTheme />
