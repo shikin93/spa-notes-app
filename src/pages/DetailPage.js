@@ -48,7 +48,7 @@ export default function DetailPage() {
 
   const onRestoreHandler = async () => {
     await unarchiveNote(id);
-    navigate('/');
+    navigate('/archives');
   };
 
   return (

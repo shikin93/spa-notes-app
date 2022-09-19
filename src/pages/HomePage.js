@@ -59,8 +59,9 @@ export default function HomePage() {
             <h2 className="text-2xl font-bold">{locale === 'id' ? 'Catatan Aktif' : 'Active Notes'}</h2>
             <SearchBar keyword={keyword} keywordChange={onKeywordChangeHandler} />
             {(searchNote.length === 0) ? <div className="text-3xl text-center dark:text-slate-400">{locale === 'id' ? 'Catatan tidak ditemukan' : 'Notes not found'}</div> : <NoteList notes={searchNote} />}
-            <button type="button" className="text-4xl p-2 bg-slate-100 rounded-full fixed bottom-10 right-5 dark:text-slate-600" onClick={onAdd}>
+            <button type="button" className="text-4xl p-2 bg-slate-100 rounded-full fixed bottom-10 right-5 dark:text-slate-600 tooltip" onClick={onAdd}>
               <BiPlus />
+              <span className="tooltiptext bg-slate-400 text-slate-100 px-2">Tambah</span>
             </button>
           </section>
         )

@@ -15,6 +15,7 @@ import ToggleTheme from './components/ToggleTheme';
 import { ThemeProvider } from './contexts/ThemeContext';
 import LocaleContext from './contexts/LocalContext';
 import ToggleLocale from './components/ToggleLocale';
+import Footer from './components/Footer';
 
 function App() {
   const [authedUser, setAuthedUser] = useState(null);
@@ -115,11 +116,11 @@ function App() {
   return (
     <ThemeProvider value={{ theme, toggleTheme }}>
       <LocaleContext.Provider value={localeContextValue}>
-        <div className="notes-app bg-slate-300 text-slate-600 dark:bg-slate-900 min-h-screen dark:text-slate-100">
-          <header className="px-5 py-8">
+        <div className="notes-app bg-slate-300 text-slate-600 dark:bg-slate-900 dark:text-slate-100">
+          <header className="px-5 py-8 mb-10 border-b border-b-slate-200 dark:border-b-slate-700">
             <Navigation logout={onLogoutHandler} name={authedUser.name} />
           </header>
-          <main className="p-5 max-w-full md:max-w-2xl lg:max-w-4xl xl:max-w-6xl mx-auto">
+          <main className="p-5 max-w-full min-h-screen md:max-w-2xl lg:max-w-4xl xl:max-w-6xl mx-auto">
             <Routes>
               <Route exact path="/" element={<HomePage />} />
               <Route path="/archives" element={<ArchivePage />} />
@@ -128,6 +129,9 @@ function App() {
               <Route path="/*" element={<PageNotFound />} />
             </Routes>
           </main>
+          <footer className="font-bold text-xs uppercase px-5 py-8 border-t border-t-slate-200 dark:border-t-slate-700">
+            <Footer />
+          </footer>
         </div>
       </LocaleContext.Provider>
     </ThemeProvider>
