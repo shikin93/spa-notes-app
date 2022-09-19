@@ -16,7 +16,7 @@ export default function NoteInput({ addNote }) {
         body,
       });
     } else {
-      alert('input tidak boleh kosong');
+      alert('minimal input 4 huruf');
     }
   };
 
